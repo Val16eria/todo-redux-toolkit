@@ -1,13 +1,14 @@
 import React, { FC } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import './Filter.css';
 
 export const Filter: FC = () => {
 	return (
 		<div className='filter__links'>
-			<a>All</a>
-			<a>Completed</a>
-			<a>Active</a>
+			<NavLink to='/'>All</NavLink>
+			<NavLink to='/completed'>Completed</NavLink>
+			<NavLink to='/active'>Active</NavLink>
 		</div>
 	);
 }
