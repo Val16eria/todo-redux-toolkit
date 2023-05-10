@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAppDispatch } from '../../../../shared/hooks/useRedux';
-import { toggleTodo } from '../../model/slice/TodoSlice';
+import { setToggle } from '../../model/slice/todoSlice';
 
 import './Item.css';
 
@@ -17,7 +17,7 @@ export const Item: FC<IItem> = ({completed, id, title}) => {
 	const dispatch = useAppDispatch();
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-		dispatch(toggleTodo(id));
+		dispatch(setToggle(id));
 	};
 
 	return (

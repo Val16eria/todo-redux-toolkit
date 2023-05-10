@@ -2,22 +2,25 @@ import React, { FC, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../../../shared/hooks/useRedux';
+import { getTodos } from '../../model/slice/todoSlice';
 
 import { Filter } from '../filter';
 import { Item } from '../item';
 
 import './List.css';
-import {todosRequest} from "../../model/slice/TodoSlice";
 
 export const List: FC = () => {
 
 	const dispatch = useAppDispatch();
 	const { filter } = useParams();
-	const { list } = useAppSelector(state => state.todos);
+	const { list, loading, error } = useAppSelector(state => state.todos);
 
 	useEffect(() => {
-		// dispatch(todosRequest(''));
-	});
+		if (list.length === 0)
+			dispatch(getTodos());
+	}, []);
+
+	console.log(list);
 
 	const filterList = () => {
 		if (filter === 'completed')
@@ -30,6 +33,14 @@ export const List: FC = () => {
 	};
 
 	const filteredList = filterList();
+
+	if (loading) {
+		return <p>Loading...</p>
+	}
+
+	if (error) {
+		return <h1>{error}</h1>
+	}
 
 	return (
 		<div className='list__container'>
